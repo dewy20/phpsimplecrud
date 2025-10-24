@@ -19,40 +19,37 @@
 CREATE DATABASE IF NOT EXISTS `db_simplecrud` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
 USE `db_simplecrud`;
 
--- Dumping structure for table db_simplecrud.tb_mahasiswa
-CREATE TABLE IF NOT EXISTS `tb_mahasiswa` (
-  `id_mhs` int(11) NOT NULL AUTO_INCREMENT,
-  `nim_mhs` char(12) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `nama_mhs` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `prodi_mhs` char(10) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+-- Tabel karyawan (pengganti tb_mahasiswa)
+CREATE TABLE IF NOT EXISTS `tb_karyawan` (
+  `id_kyw` int(11) NOT NULL AUTO_INCREMENT,
+  `nik_kyw` char(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama_kyw` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `jabatan_kyw` char(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   `alamat` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `provinsi` mediumint(3) NOT NULL,
+  `provinsi` smallint(3) NOT NULL,
   `email` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `telp` char(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `status_mhs` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id_mhs`)
+  `telp` char(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status_kyw` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id_kyw`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table db_simplecrud.tb_mahasiswa: ~0 rows (approximately)
 
 -- Dumping structure for table db_simplecrud.tb_prodi
-CREATE TABLE IF NOT EXISTS `tb_prodi` (
-  `kode_prodi` char(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nama_prodi` char(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`kode_prodi`)
+CREATE TABLE IF NOT EXISTS `tb_jabatan` (
+  `id_jabatan` char(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama_jabatan` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id_jabatan`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table db_simplecrud.tb_prodi: ~9 rows (approximately)
-INSERT INTO `tb_prodi` (`kode_prodi`, `nama_prodi`) VALUES
-	('ARS', 'Arsitek'),
-	('BD', 'Bisnis Digital'),
-	('DI', 'Desain Interior'),
-	('DKV', 'Desain Komunikasi Visual'),
-	('DM', 'Desain Mode'),
-	('MBD', 'Magister Bisnis Digital'),
-	('MDS', 'Magister Desain'),
-	('MR', 'Manajemen Ritel'),
-	('STI', 'Sistem dan Teknologi Informasi');
+INSERT INTO `tb_jabatan` (`id_jabatan`, `nama_jabatan`) VALUES  ###jabatan kariayawan
+('ADM', 'Admin'),
+('KSR', 'Kasir'),
+('HRD', 'HRD'),
+('MNG', 'Manajer'),
+('SPV', 'Supervisor'),
+('IT', 'IT Support');
 
 -- Dumping structure for table db_simplecrud.tb_provinsi
 CREATE TABLE IF NOT EXISTS `tb_provinsi` (
