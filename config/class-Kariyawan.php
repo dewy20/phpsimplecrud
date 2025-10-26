@@ -36,7 +36,7 @@
               FROM tb_Kariyawan
               JOIN tb_jabatan ON jabatan_kyw = id_jabatan
               JOIN tb_provinsi ON provinsi = id_provinsi";
-    $result = $this->conn->query($query);
+        $result = $this->conn->query($query);
         // Menyiapkan array kosong untuk menyimpan data Kariyawan 
         $Kariyawan = [];
         // Mengecek apakah ada data yang ditemukan
@@ -54,11 +54,8 @@
                 'status' => $row['status_kyw']
             ];
         }
+        return $Kariyawan;
     }
-    return $Kariyawan;
-  {
-       
- }
 
     // Method untuk mengambil data mahasiswa berdasarkan ID
     public function getUpdateKariyawan($id){
