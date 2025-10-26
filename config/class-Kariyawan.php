@@ -2,7 +2,7 @@
 
 // Memasukkan file konfigurasi database
   include_once 'db-config.php';
-{
+
   class Kariyawan extends Database {
 
     // Method untuk input data mahasiswa
@@ -17,7 +17,7 @@
         $telp     = $data['telp'];
         $status   = $data['status'];
         // Menyiapkan query SQL untuk insert data menggunakan prepared statement
-        $query = "INSERT INTO tb_karyawan (nik_kyw, nama_kyw, jabatan_kyw, alamat, provinsi, email, telp, status_kyw) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO tb_Kariyawan (nik_kyw, nama_kyw, jabatan_kyw, alamat, provinsi, email, telp, status_kyw) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->conn->prepare($query);
         if(!$stmt){
             return false;
@@ -33,16 +33,16 @@
     public function getAllKariyawan(){
         // Menyiapkan query SQL untuk mengambil data Kariyawan beserta prodi dan provinsi
         $query = "SELECT id_kyw, nik_kyw, nama_kyw, nama_jabatan, nama_provinsi, alamat, email, telp, status_kyw
-              FROM tb_karyawan
+              FROM tb_Kariyawan
               JOIN tb_jabatan ON jabatan_kyw = id_jabatan
               JOIN tb_provinsi ON provinsi = id_provinsi";
     $result = $this->conn->query($query);
         // Menyiapkan array kosong untuk menyimpan data Kariyawan 
         $Kariyawan = [];
         // Mengecek apakah ada data yang ditemukan
-        if($result->num_rows > 0){
+        if($result->num_rows > 0){ 
             // Mengambil setiap baris data dan memasukkannya ke dalam array
-            $karyawan[] = [
+            $Kariyawan[] = [ 
                 'id' => $row['id_kyw'],
                 'nik' => $row['nik_kyw'],
                 'nama' => $row['nama_kyw'],
@@ -55,9 +55,10 @@
             ];
         }
     }
-         //untuk menampilkan data pada array 
-    { return $karyawan;
-}
+    return $Kariyawan;
+  {
+       
+ }
 
     // Method untuk mengambil data mahasiswa berdasarkan ID
     public function getUpdateKariyawan($id){
@@ -72,7 +73,7 @@
         $result = $stmt->get_result();
         $data = false;
         if($result->num_rows > 0){
-            // Mengambil data mahasiswa  
+            // Mengambil data Kariyawan 
             $row = $result->fetch_assoc();
             // Menyimpan data dalam array
             $data = [
@@ -91,7 +92,7 @@
         return $data;
     }
 
-    // Method untuk mengedit data mahasiswa
+    // Method untuk mengedit data kariyawan
     public function editKariyawan($data){
         // Mengambil data dari parameter $data
          $nik      = $data['nik'];
@@ -103,20 +104,20 @@
         $telp     = $data['telp'];
         $status   = $data['status'];
         // Menyiapkan query SQL untuk update data menggunakan prepared statement
-        $query = "UPDATE tb_mahasiswa SET nim_mhs = ?, nama_mhs = ?, prodi_mhs = ?, alamat = ?, provinsi = ?, email = ?, telp = ?, status_mhs = ? WHERE id_mhs = ?";
+        $query = "UPDATE tb_Kariyawan SET nik_kyw = ?, nama_kyw = ?, jabatan_kyw = ?, alamat = ?, provinsi = ?, email = ?, telp = ?, status_kyw = ? WHERE id_kyw = ?";
         $stmt = $this->conn->prepare($query);
         if(!$stmt){
             return false;
         }
         // Memasukkan parameter ke statement
-        $query = "UPDATE tb_karyawan SET nik_kyw = ?, nama_kyw = ?, jabatan_kyw = ?, alamat = ?, provinsi = ?, email = ?, telp = ?, status_kyw = ? WHERE id_kyw = ?";
+        $query = "UPDATE tb_Kariyawan SET nik_kyw = ?, nama_kyw = ?, jabatan_kyw = ?, alamat = ?, provinsi = ?, email = ?, telp = ?, status_kyw = ? WHERE id_kyw = ?";
         $stmt->close();
         // Mengembalikan hasil eksekusi query
         return $result;
     }
 
     // Method untuk menghapus data mahasiswa
-    public function deleteMahasiswa($id){
+    public function deleteKariyawan($id){
         // Menyiapkan query SQL untuk delete data menggunakan prepared statement
         $query = "DELETE FROM tb_Kariyawan WHERE id_kyw = ?";
         $stmt = $this->conn->prepare($query);
@@ -136,7 +137,7 @@
         $likeQuery = "%".$kataKunci."%";
         // Menyiapkan query SQL untuk pencarian data mahasiswa menggunakan prepared statement
         $query = "SELECT id_kyw, nik_kyw, nama_kyw, nama_jabatan, nama_provinsi, alamat, email, telp, status_kyw 
-                  FROM tb_karyawan
+                  FROM tb_kariyawan
                   JOIN tb_jabatan ON jabatan_kyw = id_jabatan
                   JOIN tb_provinsi ON provinsi = id_provinsi
                   WHERE nik_kyw LIKE ? OR nama_kyw LIKE ?";
@@ -150,11 +151,11 @@
         $stmt->execute();
         $result = $stmt->get_result();
         // Menyiapkan array kosong untuk menyimpan data mahasiswa
-        $mahasiswa = [];
+        $Kariyawan = [];
         if($result->num_rows > 0){
             // Mengambil setiap baris data dan memasukkannya ke dalam array
             while($row = $result->fetch_assoc()) {
-                // Menyimpan data mahasiswa dalam array
+                // Menyimpan data Kariyawan dalam array
                 $Kariyawan[] = [
                     'id' => $row['id_kyw'],
                     'nik' => $row['nik_kyw'],
@@ -169,7 +170,7 @@
             }
         }
         $stmt->close();
-        // Mengembalikan array data mahasiswa yang ditemukan
+        // Mengembalikan array data kariyawan yang ditemukan
         return $Kariyawan;
     }
 

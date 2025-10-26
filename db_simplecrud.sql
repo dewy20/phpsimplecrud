@@ -19,8 +19,8 @@
 CREATE DATABASE IF NOT EXISTS `db_simplecrud` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
 USE `db_simplecrud`;
 
--- Tabel karyawan (pengganti tb_mahasiswa)
-CREATE TABLE IF NOT EXISTS `tb_karyawan` (
+-- Tabel karyawan (pengganti tb_Kariyawan)
+CREATE TABLE IF NOT EXISTS `tb_Kariyawan` (
   `id_kyw` int(11) NOT NULL AUTO_INCREMENT,
   `nik_kyw` char(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `nama_kyw` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
