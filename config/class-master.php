@@ -6,35 +6,35 @@ include_once 'db-config.php';
 class MasterData extends Database {
 
     // Method untuk mendapatkan daftar program studi
-    public function getProdi(){
-        $query = "SELECT * FROM tb_prodi";
+    public function getproduk(){
+        $query = "SELECT * FROM tb_produk";
         $result = $this->conn->query($query);
-        $prodi = [];
+        $produk = [];
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
-                $prodi[] = [
-                    'id' => $row['kode_prodi'],
-                    'nama' => $row['nama_prodi']
+                $produk[] = [
+                    'id' => $row['kode_produk'],
+                    'nama' => $row['nama_produk']
                 ];
             }
         }
-        return $prodi;
+        return $produk;
     }
 
     // Method untuk mendapatkan daftar provinsi
-    public function getProvinsi(){
-        $query = "SELECT * FROM tb_provinsi";
+    public function getroduk(){
+        $query = "SELECT * FROM tb_produk";
         $result = $this->conn->query($query);
-        $provinsi = [];
+        $produk = [];
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
-                $provinsi[] = [
-                    'id' => $row['id_provinsi'],
-                    'nama' => $row['nama_provinsi']
+                $produk[] = [
+                    'id' => $row['id_produk'],
+                    'nama' => $row['nama_produk']
                 ];
             }
         }
-        return $provinsi;
+        return $produk;
     }
 
     // Method untuk mendapatkan daftar status mahasiswa menggunakan array statis

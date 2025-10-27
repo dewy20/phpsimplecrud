@@ -33,14 +33,13 @@ CREATE TABLE IF NOT EXISTS `tb_produk` (
 
 -- Dumping structure for table db_simplecrud.tb_prodi
 CREATE TABLE IF NOT EXISTS `tb_kategory` (
-  `id_produk` char(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nama_produk` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id_produk`)
+  `id_kategory` char(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama_kategory` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id_kategory`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table db_simplecrud.tb_prodi: ~9 rows (approximately)
-INSERT INTO `tb_produk` (`id_produk`, `nama_produk`) VALUES  ###nama_produk kariayawan
-('123', 'sirih putih'),
+INSERT INTO `tb_produk` (`id_kategory`, `nama_kategory`) VALUES  ### nama_produk 
 ('456', 'sirih hitam'),
 ('789', 'tunas sirih'),
 ('10012', 'sirih wangi'),

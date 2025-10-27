@@ -26,13 +26,12 @@
         return $result;
     }
        
-}
     // Method untuk mengambil semua data produk
     public function getAllproduk(){
         // Menyiapkan query SQL untuk mengambil data produk beserta prodi dan provinsi
         $query = "SELECT id_produk, nama_produk, harga_produk, stok_produk
               FROM tb_produk
-              JOIN tb_produk ON nama_produk = id_produk"{
+              JOIN tb_produk ON nama_produk = id_produk";
               
         $result = $this->conn->query($query);
         // Menyiapkan array kosong untuk menyimpan data Kariyawan 
