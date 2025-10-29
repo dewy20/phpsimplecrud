@@ -1,29 +1,28 @@
 <?php
+// Memasukkan file class-master.php untuk mengakses class MasterData
+include '../config/class-master.php';
 
-// Memasukkan file class-mahasiswa.php untuk mengakses class Mahasiswa
-include '../config/class-mahasiswa.php';
-// Membuat objek dari class Mahasiswa
-$mahasiswa = new Mahasiswa();
-// Mengambil data mahasiswa dari form input menggunakan metode POST dan menyimpannya dalam array
-$dataMahasiswa = [
-    'nim' => $_POST['nim'],
-    'nama' => $_POST['nama'],
-    'prodi' => $_POST['prodi'],
-    'alamat' => $_POST['alamat'],
-    'provinsi' => $_POST['provinsi'],
-    'email' => $_POST['email'],
-    'telp' => $_POST['telp'],
-    'status' => $_POST['status']
+// Membuat objek dari class MasterData
+$produk = new MasterData();
+
+// Mengambil data produk dari form input menggunakan metode POST dan menyimpannya dalam array
+$dataProduk = [
+    'kode_produk' => $_POST['kode_produk'],
+    'nama_produk' => $_POST['nama_produk'],
+    'harga' => $_POST['harga'],
+    'stok' => $_POST['stok'],
+    'id_kategory' => $_POST['id_kategory']
 ];
-// Memanggil method inputMahasiswa untuk memasukkan data mahasiswa dengan parameter array $dataMahasiswa
-$input = $mahasiswa->inputMahasiswa($dataMahasiswa);
-// Mengecek apakah proses input berhasil atau tidak - true/false
-if($input){
-    // Jika berhasil, redirect ke halaman data-list.php dengan status inputsuccess
-    header("Location: ../data-list.php?status=inputsuccess");
+
+// Memanggil method inputProduk untuk memasukkan data produk dengan parameter array $dataProduk
+$input = $produk->inputProduk($dataProduk);
+
+// Mengecek apakah proses input berhasil atau tidak
+if ($input) {
+    // Jika berhasil, redirect ke halaman data-input.php dengan status success
+    header("Location: ../data-input.php?status=success");
 } else {
     // Jika gagal, redirect ke halaman data-input.php dengan status failed
     header("Location: ../data-input.php?status=failed");
 }
-
 ?>
