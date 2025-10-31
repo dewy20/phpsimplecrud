@@ -5,10 +5,8 @@ include_once 'db-config.php';
 // Class MasterData mewarisi koneksi dari class Database
 class MasterData extends Database {
 
-    /* =====================================================
-       BAGIAN PRODUK
-       ===================================================== */
-
+       // BAGIAN PRODUK
+ 
     // Ambil semua produk dari tabel tb_produk
     public function getProduk(){
         $query = "SELECT p.*, k.nama_kategory 
@@ -34,7 +32,7 @@ class MasterData extends Database {
         $id_kategory = $data['id_kategory'];
 
         // Gunakan prepared statement agar aman
-        $query = "INSERT INTO tb_produk (id_produk, nama_produk, harga, stok, id_kategory)
+        $query = "INSERT INTO tb_produk (id_produk, nama_produk, harga_produk, stok_produk, id_kategory)
                   VALUES (?, ?, ?, ?, ?)";
         $stmt = $this->conn->prepare($query);
 
@@ -42,7 +40,7 @@ class MasterData extends Database {
             return false;
         }
 
-        $stmt->bind_param("ssiii", $id_produk, $nama_produk, $harga, $stok, $id_kategory);
+        $stmt->bind_param("ssiii", $id_produk, $nama_produk, $harga_produk, $stok_produk, $id_kategory);
         $result = $stmt->execute();
         $stmt->close();
         return $result;
@@ -88,7 +86,7 @@ class MasterData extends Database {
             return false;
         }
 
-        $stmt->bind_param("ssiiii", $kode_produk, $nama_produk, $harga, $stok, $id_kategory, $id_produk);
+        $stmt->bind_param("ssiiii", $kode_produk, $nama_produk, $harga_produk, $stok_produk, $id_kategory, $id_produk);
         $result = $stmt->execute();
         $stmt->close();
         return $result;
@@ -108,11 +106,7 @@ class MasterData extends Database {
         $stmt->close();
         return $result;
     }
-
-    /* =====================================================
-       BAGIAN KATEGORI
-       ===================================================== */
-
+      // BAGIAN KATEGORI
     // Ambil semua kategori dari tabel tb_kategory
     public function getKategory(){
         $query = "SELECT * FROM tb_kategory ORDER BY nama_kategory ASC";

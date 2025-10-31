@@ -7,7 +7,7 @@ class Database {
     private $db_user = "root"; // database username
     private $db_pass = ""; // database password
     private $db_name = "db_simplecrud"; // database name
-    public $conn; // database connection
+    public $conn; // database connectiona
 
     // Konstruktor untuk inisialisasi koneksi database
     public function __construct(){

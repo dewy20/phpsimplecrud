@@ -24,7 +24,6 @@ class Produk extends Database {
 
     // ---------------- AMBIL SEMUA PRODUK ----------------
     public function getAllProduk() {
-        // kalau tidak ada tabel lain, cukup ambil dari tb_produk saja
         $query = "SELECT id_produk, nama_produk, harga_produk, stok_produk FROM tb_produk";
         $result = $this->conn->query($query);
 
@@ -68,7 +67,9 @@ class Produk extends Database {
         $harga  = $data['harga'];
         $stok   = $data['stok'];
 
-        $query = "UPDATE tb_produk SET nama_produk = ?, harga_produk = ?, stok_produk = ? WHERE id_produk = ?";
+        $query = "UPDATE tb_produk 
+                  SET nama_produk = ?, harga_produk = ?, stok_produk = ? 
+                  WHERE id_produk = ?";
         $stmt = $this->conn->prepare($query);
         if(!$stmt) return false;
 

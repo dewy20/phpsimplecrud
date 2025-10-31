@@ -1,11 +1,11 @@
 <?php
 include_once 'config/class-produk.php';
-$produk = new Produk();
+$produk = new produk();
 $kataKunci = '';
 
 if (isset($_GET['search'])) {
     $kataKunci = $_GET['search'];
-    $cariProduk = $produk->searchProduk($kataKunci);
+    $cariproduk = $produk->searchproduk($kataKunci);
 }
 ?>
 <!doctype html>
@@ -76,7 +76,7 @@ if (isset($_GET['search'])) {
                                                 <thead class="table-dark">
                                                     <tr>
                                                         <th>No</th>
-                                                        <th>Kode Produk</th>
+                                                        <th>id Produk</th>
                                                         <th>Nama Produk</th>
                                                         <th>Harga</th>
                                                         <th>Stok</th>
@@ -85,10 +85,10 @@ if (isset($_GET['search'])) {
                                                     </tr>
                                                 </thead>
                                                 <tbody>';
-                                            foreach ($cariProduk as $index => $p) {
+                                            foreach ($cariproduk as $index => $p) {
                                                 echo '<tr>
                                                     <td>' . ($index + 1) . '</td>
-                                                    <td>' . htmlspecialchars($p['kode_produk']) . '</td>
+                                                    <td>' . htmlspecialchars($p['id_produk']) . '</td>
                                                     <td>' . htmlspecialchars($p['nama_produk']) . '</td>
                                                     <td>Rp' . number_format($p['harga'], 0, ',', '.') . '</td>
                                                     <td>' . $p['stok'] . '</td>

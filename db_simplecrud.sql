@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `tb_kategory` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table db_simplecrud.tb_prodi: ~9 rows (approximately)
-INSERT INTO `tb_produk` (`id_kategory`, `nama_kategory`) VALUES  ### nama_produk 
+INSERT INTO `tb_produk` (`id_kategory`, `nama_kategory`) VALUES ### nama_produk 
 ('456', 'sirih hitam'),
 ('789', 'tunas sirih'),
 ('10012', 'sirih wangi'),
