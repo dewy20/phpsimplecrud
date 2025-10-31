@@ -27,14 +27,14 @@ class MasterData extends Database {
 
     // Input produk baru ke tabel tb_produk
     public function inputProduk($data){
-        $kode_produk = $data['kode_produk'];
+        $id_produk = $data['id_produk'];
         $nama_produk = $data['nama_produk'];
         $harga = $data['harga'];
         $stok = $data['stok'];
         $id_kategory = $data['id_kategory'];
 
         // Gunakan prepared statement agar aman
-        $query = "INSERT INTO tb_produk (kode_produk, nama_produk, harga, stok, id_kategory)
+        $query = "INSERT INTO tb_produk (id_produk, nama_produk, harga, stok, id_kategory)
                   VALUES (?, ?, ?, ?, ?)";
         $stmt = $this->conn->prepare($query);
 
@@ -42,7 +42,7 @@ class MasterData extends Database {
             return false;
         }
 
-        $stmt->bind_param("ssiii", $kode_produk, $nama_produk, $harga, $stok, $id_kategory);
+        $stmt->bind_param("ssiii", $id_produk, $nama_produk, $harga, $stok, $id_kategory);
         $result = $stmt->execute();
         $stmt->close();
         return $result;

@@ -6,16 +6,16 @@ include '../config/class-master.php';
 $produk = new MasterData();
 
 // Mengambil data produk dari form input menggunakan metode POST dan menyimpannya dalam array
-$dataProduk = [
-    'kode_produk' => $_POST['kode_produk'],
+$dataproduk = [
+    'id_produk' => $_POST['id_produk'], // ganti dari kode_produk -> id_produk
     'nama_produk' => $_POST['nama_produk'],
-    'harga' => $_POST['harga'],
-    'stok' => $_POST['stok'],
-    'id_kategory' => $_POST['id_kategory']
+    'harga' => $_POST['harga_produk'],
+    'stok' => $_POST['stok_produk'],
+    'id_kategory' => $_POST['kategory']
 ];
 
 // Memanggil method inputProduk untuk memasukkan data produk dengan parameter array $dataProduk
-$input = $produk->inputProduk($dataProduk);
+$input = $produk->inputproduk($dataproduk);
 
 // Mengecek apakah proses input berhasil atau tidak
 if ($input) {

@@ -5,8 +5,11 @@ include_once 'config/class-master.php';
 // Buat objek master
 $master = new MasterData();
 
-// Ambil semua kategori dari tabel tb_kategory
-$kategoriList = $master->getKategory();
+// --- Kategori manual: Sirih Daun & Sirih Buah ---
+$kategoriList = [
+    ['id' => 1, 'nama' => 'Sirih Daun'],
+    ['id' => 2, 'nama' => 'Sirih Buah']
+];
 
 // Alert notifikasi
 if (isset($_GET['status'])) {
@@ -60,8 +63,8 @@ if (isset($_GET['status'])) {
                                 <div class="card-body">
 
                                     <div class="mb-3">
-                                        <label for="kode" class="form-label">Kode Produk</label>
-                                        <input type="text" class="form-control" id="kode" name="kode_produk" required>
+                                        <label for="id_produk" class="form-label">ID Produk</label>
+                                        <input type="text" class="form-control" id="id_produk" name="id_produk" required>
                                     </div>
 
                                     <div class="mb-3">
@@ -70,22 +73,27 @@ if (isset($_GET['status'])) {
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="harga" class="form-label">Harga</label>
-                                        <input type="number" class="form-control" id="harga" name="harga" required>
+                                        <label for="harga" class="form-label">Harga Produk</label>
+                                        <input type="number" class="form-control" id="harga" name="harga_produk" required>
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="stok" class="form-label">Stok</label>
-                                        <input type="number" class="form-control" id="stok" name="stok" required>
+                                        <label for="stok" class="form-label">Stok Produk</label>
+                                        <select class="form-select" id="stok" name="stok_produk" required>
+                                            <option value="" selected disabled>Pilih Status Stok</option>
+                                            <option value="Masih Ada">Masih Ada</option>
+                                            <option value="Hampir Habis">Hampir Habis</option>
+                                            <option value="Habis">Habis</option>
+                                        </select>
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="kategori" class="form-label">Kategori</label>
-                                        <select class="form-select" id="kategori" name="id_kategory" required>
+                                        <select class="form-select" id="kategori" name="kategory" required>
                                             <option value="" selected disabled>Pilih Kategori</option>
                                             <?php 
                                             foreach ($kategoriList as $kategori){
-                                                echo '<option value="'.$kategori['id'].'">'.$kategori['nama'].'</option>';
+                                                echo '<option value="'.$kategori['nama'].'">'.$kategori['nama'].'</option>';
                                             }
                                             ?>
                                         </select>
