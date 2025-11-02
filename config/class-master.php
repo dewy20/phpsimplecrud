@@ -8,7 +8,7 @@ class MasterData extends Database {
        // BAGIAN PRODUK
  
     // Ambil semua produk dari tabel tb_produk
-    public function getProduk(){
+    public function getproduk(){
         $query = "SELECT p.*, k.nama_kategory 
                   FROM tb_produk p 
                   LEFT JOIN tb_kategory k ON p.id_kategory = k.id_kategory";
@@ -24,27 +24,29 @@ class MasterData extends Database {
     }
 
     // Input produk baru ke tabel tb_produk
-    public function inputProduk($data){
-        $id_produk = $data['id_produk'];
-        $nama_produk = $data['nama_produk'];
-        $harga = $data['harga'];
-        $stok = $data['stok'];
-        $id_kategory = $data['id_kategory'];
+    public function inputproduk($data){
+        // HAPUS BARIS ID PRODUK INI KARENA SUDAH AUTO INCREMENT
+       // $id_produk = $data['id_produk']; 
+    
+    $nama_produk = $data['nama_produk'];
+    $harga = $data['harga'];
+    $stok = $data['stok'];
+    $id_kategory = $data['id_kategory'];
 
-        // Gunakan prepared statement agar aman
-        $query = "INSERT INTO tb_produk (id_produk, nama_produk, harga_produk, stok_produk, id_kategory)
-                  VALUES (?, ?, ?, ?, ?)";
-        $stmt = $this->conn->prepare($query);
+        // HAPUS id_produk DARI DAFTAR KOLOM
+    $query = "INSERT INTO tb_produk (nama_produk, harga_produk, stok_produk, id_kategory)
+                VALUES (?, ?, ?, ?)"; // Total 4 parameter
+    $stmt = $this->conn->prepare($query);
 
-        if(!$stmt){
-            return false;
-        }
-
-        $stmt->bind_param("ssiii", $id_produk, $nama_produk, $harga_produk, $stok_produk, $id_kategory);
-        $result = $stmt->execute();
-        $stmt->close();
-        return $result;
+    if(!$stmt){
+        return false;
     }
+      // Sesuaikan bind_param: s (nama), s (harga - untuk decimal), i (stok), s (id_kategory)
+    $stmt->bind_param("ssis", $nama_produk, $harga, $stok, $id_kategory); 
+    $result = $stmt->execute();
+    $stmt->close();
+    return $result;
+}
 
     // Ambil satu produk berdasarkan id
     public function getUpdateProduk($id){
@@ -70,28 +72,29 @@ class MasterData extends Database {
 
     // Update data produk berdasarkan id
     public function updateProduk($data){
-        $id_produk = $data['id_produk'];
-        $kode_produk = $data['kode_produk'];
-        $nama_produk = $data['nama_produk'];
-        $harga = $data['harga'];
-        $stok = $data['stok'];
-        $id_kategory = $data['id_kategory'];
+    $id_produk = $data['id_produk'];
+    $nama_produk = $data['nama_produk'];
+    // KOREKSI: Gunakan key yang benar yang dikirim dari form POST
+    $harga = $data['harga_produk']; // <--- UBAH DARI $data['harga']
+    $stok = $data['stok_produk'];   // <--- UBAH DARI $data['stok']
+    $id_kategory = $data['id_kategory'];
 
-        $query = "UPDATE tb_produk 
-                  SET kode_produk=?, nama_produk=?, harga=?, stok=?, id_kategory=? 
-                  WHERE id_produk=?";
-        $stmt = $this->conn->prepare($query);
+       // KOREKSI NAMA KOLOM SQL (harga dan stok harus ada _produk, kode_produk dihapus)
+    $query = "UPDATE tb_produk 
+              SET nama_produk=?, harga_produk=?, stok_produk=?, id_kategory=? 
+              WHERE id_produk=?"; 
+    $stmt = $this->conn->prepare($query);
 
-        if(!$stmt){
-            return false;
-        }
-
-        $stmt->bind_param("ssiiii", $kode_produk, $nama_produk, $harga_produk, $stok_produk, $id_kategory, $id_produk);
-        $result = $stmt->execute();
-        $stmt->close();
-        return $result;
+    if(!$stmt){
+        return false;
     }
-
+        // KOREKSI BIND_PARAM: ss i s i (nama, harga, stok, kategori, id_produk)
+        // Harga (s), Stok (i), Kategori (s), ID Produk (i)
+    $stmt->bind_param("ssisi", $nama_produk, $harga, $stok, $id_kategory, $id_produk);
+    $result = $stmt->execute();
+    $stmt->close();
+    return $result;
+}
     // Hapus produk berdasarkan id
     public function deleteProduk($id){
         $query = "DELETE FROM tb_produk WHERE id_produk = ?";

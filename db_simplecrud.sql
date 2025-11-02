@@ -16,8 +16,8 @@
 
 
 -- Dumping database structure for db_simplecrud
-CREATE DATABASE IF NOT EXISTS `db_simplecrud` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
-USE `db_simplecrud`;
+CREATE DATABASE IF NOT EXISTS `db_scmascrud` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
+USE `db_scmascrud`;
 
 -- Tabel karyawan (pengganti tb_Kariyawan)
 CREATE TABLE IF NOT EXISTS `tb_produk` (

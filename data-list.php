@@ -65,26 +65,28 @@ if (isset($_GET['status'])) {
                                     <thead class="table-dark text-center">
                                         <tr>
                                             <th>No</th>
-                                            <th>ID Produk</th>
-                                            <th>Nama Produk</th>
-                                            <th>Harga</th>
-                                            <th>Stok</th>
-                                            <th>Kategori</th>
+                                            <th>id produk</th>
+                                            <th>nama produk</th>
+                                            <th>harga</th>
+                                            <th>stok</th>
+                                            <th>kategori</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php 
-                                        if (!empty($dataProduk)) {
+                                        if (!empty($dataproduk)) {
                                             $no = 1;
-                                            foreach ($dataProduk as $p) {
+                                            foreach ($dataproduk as $p) {
 
                                                 // Pastikan semua data aman dari error undefined
+                                                // KOREKSI NAMA KUNCI JIKA DATABASE MENGGUNAKAN NAMA BERBEDA
                                                 $id_produk = $p['id_produk'] ?? '-';
                                                 $nama_produk = $p['nama_produk'] ?? '-';
-                                                $harga = isset($p['harga']) ? number_format($p['harga'], 0, ',', '.') : '0';
-                                                $stok = $p['stok'] ?? '0';
-                                                $kategori = $p['nama_kategory'] ?? ($p['id_kategory'] ?? '-');
+                                                // --- KODE YANG ANDA TANYAKAN DIMULAI DARI SINI ---
+                                                $harga = isset($p['harga_produk']) ? number_format($p['harga_produk'], 0, ',', '.') : '0'; 
+                                                $stok = $p['stok_produk'] ?? '0'; 
+                                                $kategori = $p['nama_kategory'] ?? ($p['id_kategory'] ?? '-'); 
 
                                                 echo "
                                                 <tr class='text-center'>
@@ -95,25 +97,25 @@ if (isset($_GET['status'])) {
                                                     <td>{$stok}</td>
                                                     <td>{$kategori}</td>
                                                     <td>
-                                                        <a href='edit-produk.php?id={$id_produk}' class='btn btn-warning btn-sm'>
-                                                            <i class='bi bi-pencil-square'></i> Edit
-                                                        </a>
-                                                        <a href='proses/proses-hapus-produk.php?id={$id_produk}' 
-                                                           class='btn btn-danger btn-sm' 
-                                                           onclick=\"return confirm('Apakah Anda yakin ingin menghapus produk ini?');\">
-                                                            <i class='bi bi-trash'></i> Hapus
-                                                        </a>
-                                                    </td>
+                                                    <a href='edit-produk.php?id={$id_produk}' class='btn btn-warning btn-sm'>
+                                                    <i class='bi bi-pencil-square'></i> Edit
+                                                    </a>
+                                                    <a href='proses/proses-hapus-produk.php?id={$id_produk}' 
+                                                    class='btn btn-danger btn-sm' 
+                                                    onclick=\"return confirm('Apakah Anda yakin ingin menghapus produk ini?');\">
+                                                    <i class='bi bi-trash'></i> Hapus
+                                                    </a>
+                                                </td>
                                                 </tr>";
-                                                $no++;
-                                            }
-                                        } else {
-                                            echo "<tr><td colspan='7' class='text-center'>Belum ada data produk</td></tr>";
-                                        }
-                                        ?>
+                                                    $no++;
+                                                }
+                                                } else {
+                                                    echo "<tr><td colspan='7' class='text-center'>Belum ada data produk</td></tr>";
+                                                }
+                                           ?>
                                     </tbody>
-                                </table>
-                            </div>
+                                 </table>
+                             </div>
                         </div>
                     </div>
                 </div>
