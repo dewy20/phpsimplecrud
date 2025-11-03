@@ -18,7 +18,11 @@
 					<div class="container-fluid">
 						<div class="row">
 							<div class="col-sm-6">
+<<<<<<< HEAD
 								<h3 class="mb-0">SIMRIH</h3>
+=======
+								<h3 class="mb-0">Aplikasi SIMRIH</h3>
+>>>>>>> b30687c9df5c56b155ab077eb9e320ad94a897fa
 							</div>
 							<div class="col-sm-6">
 								<ol class="breadcrumb float-sm-end">
@@ -51,11 +55,19 @@
 									</div>
 
 									<div class="card-body">
+<<<<<<< HEAD
 										<p>Halo! Epic adalah Sistem Informasi CRUD Manajemen Menu dan Pesanan restoran. Aplikasi ini bertujuan untuk mengajarkan Anda bagaimana merancang dashboard pengelolaan restoran dengan konsep CRUD (Create, Read, Update, Delete) menggunakan bahasa pemrograman PHP. Seluruh penulisan kode diimplementasikan dengan paradigma OOP (Object Oriented Programming).</p>
 										<p>Silakan gunakan secara bijak, modifikasi kode, dan kembangkan fitur sesuai kebutuhan operasional restoran Anda! 🍽️👨‍🍳</p>
 										<a href="data-input.php" class="btn btn-primary btn-lg"><i class="bi bi-clipboard-data-fill"></i> Input Daftar Menu</a>
 										<a href="data-list.php" class="btn btn-success btn-lg"><i class="bi bi-card-list"></i> Lihat Daftar Menu</a>
 										<a href="data-search.php" class="btn btn-warning btn-lg"><i class="bi bi-search-heart-fill"></i> Cari Daftar Menu</a>
+=======
+										<p>Halo. SIMRIH merupakan singkatan dari Sistem Informasi CRUD sistem manajemen informasi sirih, aplikasi ini bertujuan untuk mengajarkan bagaimana merancang sebuah dashboard pengelolaan dengan konsep CRUD menggunakan bahasa pemrograman PHP. Penulisan kode menggunakan OOP (Object Oriented Programming). Silakan gunakan secara bijak dan modifikasi sesuai keperluan!</p>
+										<p>Silakan pilih salah satu tombol untuk memulai!</p>
+										<a href="data-input.php" class="btn btn-primary btn-lg"><i class="bi bi-clipboard-data-fill"></i> Input Data Prodak</a>
+										<a href="data-list.php" class="btn btn-success btn-lg"><i class="bi bi-card-list"></i> Lihat Daftar Prodak</a>
+										<a href="data-search.php" class="btn btn-warning btn-lg"><i class="bi bi-search-heart-fill"></i> Cari Prodak</a>
+>>>>>>> b30687c9df5c56b155ab077eb9e320ad94a897fa
 									</div>
 
 								</div>

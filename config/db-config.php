@@ -6,8 +6,13 @@ class Database {
     private $db_host = "localhost"; // database host
     private $db_user = "root"; // database username
     private $db_pass = ""; // database password
+<<<<<<< HEAD
     private $db_name = "db_epic"; // database name
     public $conn; // database connection
+=======
+    private $db_name = "db_scmascrud"; // database name
+    public $conn; // database connectiona
+>>>>>>> b30687c9df5c56b155ab077eb9e320ad94a897fa
 
     // Konstruktor untuk inisialisasi koneksi database
     public function __construct(){

@@ -16,44 +16,36 @@
 
 
 -- Dumping database structure for db_simplecrud
-CREATE DATABASE IF NOT EXISTS `db_simplecrud` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
-USE `db_simplecrud`;
+CREATE DATABASE IF NOT EXISTS `db_scmascrud` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
+USE `db_scmascrud`;
 
--- Dumping structure for table db_simplecrud.tb_mahasiswa
-CREATE TABLE IF NOT EXISTS `tb_mahasiswa` (
-  `id_mhs` int(11) NOT NULL AUTO_INCREMENT,
-  `nim_mhs` char(12) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `nama_mhs` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `prodi_mhs` char(10) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `alamat` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `provinsi` mediumint(3) NOT NULL,
-  `email` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `telp` char(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `status_mhs` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id_mhs`)
+-- Tabel karyawan (pengganti tb_Kariyawan)
+CREATE TABLE IF NOT EXISTS `tb_produk` (
+  `id_produk` int(11) NOT NULL AUTO_INCREMENT,
+  `nama_produk` char(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `harga_produk` char(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `stok` text COLLATE utf8mb4_unicode_ci NOT NULL,
+ 
+  PRIMARY KEY (`id_produk`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table db_simplecrud.tb_mahasiswa: ~0 rows (approximately)
 
 -- Dumping structure for table db_simplecrud.tb_prodi
-CREATE TABLE IF NOT EXISTS `tb_prodi` (
-  `kode_prodi` char(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nama_prodi` char(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`kode_prodi`)
+CREATE TABLE IF NOT EXISTS `tb_kategory` (
+  `id_kategory` char(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama_kategory` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id_kategory`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table db_simplecrud.tb_prodi: ~9 rows (approximately)
-INSERT INTO `tb_prodi` (`kode_prodi`, `nama_prodi`) VALUES
-	('ARS', 'Arsitek'),
-	('BD', 'Bisnis Digital'),
-	('DI', 'Desain Interior'),
-	('DKV', 'Desain Komunikasi Visual'),
-	('DM', 'Desain Mode'),
-	('MBD', 'Magister Bisnis Digital'),
-	('MDS', 'Magister Desain'),
-	('MR', 'Manajemen Ritel'),
-	('STI', 'Sistem dan Teknologi Informasi');
+INSERT INTO `tb_produk` (`id_kategory`, `nama_kategory`) VALUES ### nama_produk 
+('456', 'sirih hitam'),
+('789', 'tunas sirih'),
+('10012', 'sirih wangi'),
+('48210', 'sirih daun'),
 
+<<<<<<< HEAD
 -- Dumping structure for table db_simplecrud.tb_provinsi
 CREATE TABLE IF NOT EXISTS `tb_provinsi` (
   `id_provinsi` smallint(3) NOT NULL AUTO_INCREMENT,
@@ -75,3 +67,5 @@ INSERT INTO `tb_provinsi` (`id_provinsi`, `nama_provinsi`) VALUES
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
+=======
+>>>>>>> b30687c9df5c56b155ab077eb9e320ad94a897fa
