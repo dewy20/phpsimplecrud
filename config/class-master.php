@@ -7,17 +7,17 @@ class MasterData extends Database {
 
     // Method untuk mendapatkan daftar menu
     public function getMenu(){
-        $query = "SELECT * FROM tb_prasman";
+        $query = "SELECT * FROM tb_epic";
         $result = $this->conn->query($query);
         $menu = [];
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
-                $prodi[] = [
+                $menu[] = [
                     'id' => $row['kode_menu'],
-                    'nama' => $row['nama_menu']
-                    'kategori' => $row['kategori']
-                    'harga' => $row['harga']
-                    'porsi' => $row['porsi']
+                    'nama' => $row['nama_menu'],
+                    'kategori' => $row['kategori'],
+                    'harga' => $row['harga'],
+                    'porsi' => $row['porsi'],
                     'bahan' => $row['bahan_utama']
                 ];
             }
@@ -41,7 +41,7 @@ class MasterData extends Database {
         return $provinsi;
     }
 
-    // Method untuk mendapatkan daftar status mahasiswa menggunakan array statis
+    // Method untuk mendapatkan daftar status
     public function getStatus(){
         return [
             ['id' => 1, 'nama' => 'Tersedia'],
@@ -49,20 +49,22 @@ class MasterData extends Database {
         ];
     }
 
-    // Method untuk input data program studi
+    // Method untuk input data menu
     public function inputMenu($data){
         $kodemenu = $data['kode'];
         $namamenu = $data['nama'];
         $kategori = $data['kategori'];
         $harga = $data['harga'];
         $porsi = $data['porsi'];
-        $bahan = $data['bahan'];
-        $query = "INSERT INTO tb_prasman (kode_menu, nama_menu, kategori, harga, porsi, bahan_utama) VALUES (?, ?, ?, ?, ?, ?)";
+        $bahanutama = $data['bahan'];
+
+        $query = "INSERT INTO tb_epic (kode_menu, nama_menu, kategori, harga, porsi, bahan_utama) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $this->conn->prepare($query);
         if(!$stmt){
             return false;
         }
-        $stmt->bind_param("ss", $kodemenu, $namamenu, $kategori, $harga, $porsi, $bahanutama);
+        // harga = double (d), porsi = integer (i)
+        $stmt->bind_param("sssdis", $kodemenu, $namamenu, $kategori, $harga, $porsi, $bahanutama);
         $result = $stmt->execute();
         $stmt->close();
         return $result;
@@ -70,7 +72,7 @@ class MasterData extends Database {
 
     // Method untuk mendapatkan data menu berdasarkan kode
     public function getUpdateMenu($id){
-        $query = "SELECT * FROM tb_prasman WHERE kode_menu = ?";
+        $query = "SELECT * FROM tb_epic WHERE kode_menu = ?";
         $stmt = $this->conn->prepare($query);
         if(!$stmt){
             return false;
@@ -78,15 +80,15 @@ class MasterData extends Database {
         $stmt->bind_param("s", $id);
         $stmt->execute();
         $result = $stmt->get_result();
-        $prodi = null;
+        $menu = null;
         if($result->num_rows > 0){
             $row = $result->fetch_assoc();
-            $prodi = [
+            $menu = [
                 'id' => $row['kode_menu'],
-                'nama' => $row['nama_menu']
-                'kategori' => $row['kategori']
-                'harga' => $row['harga']
-                'porsi' => $row['porsi']
+                'nama' => $row['nama_menu'],
+                'kategori' => $row['kategori'],
+                'harga' => $row['harga'],
+                'porsi' => $row['porsi'],
                 'bahan' => $row['bahan_utama']
             ];
         }
@@ -96,26 +98,28 @@ class MasterData extends Database {
 
     // Method untuk mengedit data menu
     public function updateMenu($data){
-        $kodeMenu = $data['kode'];
-        $namaMenu = $data['nama'];
+        $kodemenu = $data['kode'];
+        $namamenu = $data['nama'];
         $kategori = $data['kategori'];
-        $harga= $data['harga'];
+        $harga = $data['harga'];
         $porsi = $data['porsi'];
         $bahanutama = $data['bahan'];
-        $query = "UPDATE tb_prasman SET nama_menu, kategori, harga, porsi, bahan_utama = ? WHERE kode_menu = ?";
+
+        $query = "UPDATE tb_epic SET nama_menu = ?, kategori = ?, harga = ?, porsi = ?, bahan_utama = ? WHERE kode_menu = ?";
         $stmt = $this->conn->prepare($query);
         if(!$stmt){
             return false;
         }
-        $stmt->bind_param("ss", $kodemenu, $namamenu, $kategori, $harga, $porsi, $bahanutama);
+        // tipe parameter sesuai urutan: nama_menu(s), kategori(s), harga(d), porsi(i), bahan_utama(s), kode_menu(s)
+        $stmt->bind_param("ssdiss", $namamenu, $kategori, $harga, $porsi, $bahanutama, $kodemenu);
         $result = $stmt->execute();
         $stmt->close();
         return $result;
     }
 
-    // Method untuk menghapus data program studi
+    // Method untuk menghapus data menu
     public function deleteMenu($id){
-        $query = "DELETE FROM tb_prasman WHERE kode_menu = ?";
+        $query = "DELETE FROM tb_epic WHERE kode_menu = ?";
         $stmt = $this->conn->prepare($query);
         if(!$stmt){
             return false;

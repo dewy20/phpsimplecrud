@@ -1,6 +1,6 @@
 <?php 
 
-// Silakan lihat komentar di file data-input.php untuk penjelasan kode ini, karena struktur dan logikanya serupa.
+// Menampilkan alert jika ada status gagal pada URL
 if(isset($_GET['status'])){
     if($_GET['status'] == 'failed'){
         echo "<script>alert('Gagal menambahkan data program studi. Silakan coba lagi.');</script>";
@@ -57,15 +57,31 @@ if(isset($_GET['status'])){
 											</button>
 										</div>
 									</div>
-                                    <form action="proses/proses-prodi.php?aksi=inputprodi" method="POST">
+                                    <form action="proses/proses-prodi.php?aksi=inputmenu" method="POST" autocomplete="off">
 									    <div class="card-body">
                                             <div class="mb-3">
-                                                <label for="nama" class="form-label">Kode menu</label>
-                                                <input type="text" class="form-control" id="kode" name="kode" placeholder="Masukkan Kode Program Studi" required>
+                                                <label for="kode" class="form-label">Kode menu</label>
+                                                <input type="text" class="form-control" id="kode" name="kode" placeholder="Masukkan Kode Menu" required>
                                             </div>
 											<div class="mb-3">
 												<label for="nama" class="form-label">Nama menu</label>
-												<input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama Program Studi" required>
+												<input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama Menu" required>
+											</div>
+											<div class="mb-3">
+												<label for="kategori" class="form-label">Kategori</label>
+												<input type="text" class="form-control" id="kategori" name="kategori" placeholder="Masukkan Kategori Menu" required>
+											</div>
+											<div class="mb-3">
+												<label for="harga" class="form-label">Harga</label>
+												<input type="number" class="form-control" id="harga" name="harga" placeholder="Masukkan Harga Menu" required>
+											</div>
+											<div class="mb-3">
+												<label for="porsi" class="form-label">Porsi</label>
+												<input type="number" class="form-control" id="porsi" name="porsi" placeholder="Masukkan Porsi Menu" required>
+											</div>
+											<div class="mb-3">
+												<label for="bahan" class="form-label">Bahan Utama</label>
+												<input type="text" class="form-control" id="bahan" name="bahan" placeholder="Masukkan Bahan Utama" required>
 											</div>
                                         </div>
 									    <div class="card-footer">

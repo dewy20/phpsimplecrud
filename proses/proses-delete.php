@@ -1,6 +1,6 @@
 <?php
 // 1️⃣ Menghubungkan ke file class-menu.php
-include_once '../config/class-menu.php';
+include_once '../config/class-produk.php';
 
 // 2️⃣ Membuat objek dari class Menu
 $menu = new Menu();
@@ -10,7 +10,7 @@ if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
     // 4️⃣ Memanggil fungsi deleteMenu dari class Menu
-    $delete = $menu->deleteMenu($id);
+    $delete = $produk->deleteProduk($id);
 
     // 5️⃣ Cek apakah proses berhasil
     if ($delete) {

@@ -3,7 +3,7 @@
 include_once 'config/class-menu.php';
 
 // 2️⃣ Membuat objek dari class Menu
-$menu = new Menu();
+$produk = new Menu();
 
 // 3️⃣ Mengecek apakah ada parameter ID di URL (misalnya: data-edit.php?id=3)
 if (isset($_GET['id'])) {

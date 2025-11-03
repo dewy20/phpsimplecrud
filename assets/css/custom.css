@@ -1,1 +1,5 @@
 /* Taruh CSS Custom Disini */
+.app-main {
+    background-image: url(../img/walpaper.jpg);
+    background-size: cover;
+}

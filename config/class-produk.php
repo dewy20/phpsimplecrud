@@ -2,19 +2,19 @@
 // Menghubungkan ke file konfigurasi database
 include_once 'db-config.php';
 
-class Menu extends Database {
+class produk extends Database {
 
     // ===== 1️⃣ INPUT MENU BARU =====
-    public function inputMenu($data){
+    public function inputproduk($data){
         // Mengambil data dari form (array $data)
         $nama      = $data['nama'];
-        $kategori  = $data['kategori'];
+        $kategori  = $data['kategory'];
         $harga     = $data['harga'];
         $deskripsi = $data['deskripsi'];
         $status    = $data['status'];
 
         // ⚠️ Gunakan query INSERT untuk menambah data
-        $query = "INSERT INTO tb_menu (nama_menu, kategori, harga, deskripsi, status) VALUES (?, ?, ?, ?, ?)";
+        $query = "INSERT INTO tb_produk (nama_menu, kategory, harga, deskripsi, status) VALUES (?, ?, ?, ?, ?)";
         $stmt = $this->conn->prepare($query);
 
         // Cek apakah statement berhasil dibuat
@@ -33,8 +33,8 @@ class Menu extends Database {
     }
 
     // ===== 2️⃣ MENGAMBIL SEMUA DATA MENU =====
-    public function getAllMenu(){
-        $query = "SELECT id_menu, nama_menu, kategori, harga, deskripsi, status FROM tb_menu";
+    public function getAllproduk(){
+        $query = "SELECT id_produk, nama_produk, kategory, harga, stok deskripsi, status FROM tb_produk";
         $result = $this->conn->query($query);
         $menu = [];
 
@@ -47,8 +47,8 @@ class Menu extends Database {
     }
 
     // ===== 3️⃣ MENGAMBIL MENU BERDASARKAN ID (getUpdateMenu - lama) =====
-    public function getUpdateMenu($id){
-        $query = "SELECT * FROM tb_menu WHERE id_menu = ?";
+    public function getUpdateproduk($id){
+        $query = "SELECT * FROM tb_produk WHERE id_produk = ?";
         $stmt = $this->conn->prepare($query);
         if(!$stmt){
             return false;
@@ -65,8 +65,8 @@ class Menu extends Database {
 
     // ✅ ===== 3b️⃣ TAMBAHAN BARU: getMenuById() =====
     // (fungsi ini yang dipakai oleh data-edit.php)
-    public function getMenuById($id){
-        $query = "SELECT * FROM tb_menu WHERE id_menu = ?";
+    public function getprodukById($id){
+        $query = "SELECT * FROM tb_produk WHERE id_produk = ?";
         $stmt = $this->conn->prepare($query);
         if(!$stmt){
             return false;
@@ -82,21 +82,21 @@ class Menu extends Database {
     }
 
     // ===== 4️⃣ MENGEDIT MENU =====
-    public function editMenu($data){
-        $id        = $data['id_menu'];
-        $nama      = $data['nama_menu'];
-        $kategori  = $data['kategori'];
+    public function editproduk($data){
+        $id        = $data['id_produk'];
+        $nama      = $data['nama_produk'];
+        $kategori  = $data['kategory'];
         $harga     = $data['harga'];
         $deskripsi = $data['deskripsi'];
         $status    = $data['status'];
 
-        $query = "UPDATE tb_menu SET nama_menu = ?, kategori = ?, harga = ?, deskripsi = ?, status = ? WHERE id_menu = ?";
+        $query = "UPDATE tb_produk SET nama_produk = ?, kategory = ?, harga = ?, deskripsi = ?, status = ? WHERE id_menu = ?";
         $stmt = $this->conn->prepare($query);
         if(!$stmt){
             return false;
         }
 
-        $stmt->bind_param("ssissi", $nama, $kategori, $harga, $deskripsi, $status, $id);
+        $stmt->bind_param("ssissi", $nama, $kategory, $harga, $deskripsi, $status, $id);
         $result = $stmt->execute();
         $stmt->close();
 
@@ -104,8 +104,8 @@ class Menu extends Database {
     }
 
     // ===== 5️⃣ MENGHAPUS MENU =====
-    public function deleteMenu($id){
-        $query = "DELETE FROM tb_menu WHERE id_menu = ?";
+    public function deleteproduk($id){
+        $query = "DELETE FROM tb_produk WHERE id_produk = ?";
         $stmt = $this->conn->prepare($query);
         if(!$stmt){
             return false;
@@ -119,11 +119,11 @@ class Menu extends Database {
     }
 
     // ===== 6️⃣ MENCARI MENU BERDASARKAN NAMA ATAU KATEGORI =====
-    public function searchMenu($kataKunci){
+    public function searchproduk($kataKunci){
         $likeQuery = "%".$kataKunci."%";
-        $query = "SELECT id_menu, nama_menu, kategori, harga, deskripsi, status 
-                  FROM tb_menu 
-                  WHERE nama_menu LIKE ? OR kategori LIKE ?";
+        $query = "SELECT id_produk, nama_produk, kategory, harga, deskripsi, status 
+                  FROM tb_produk 
+                  WHERE nama_produk LIKE ? OR kategory LIKE ?";
         $stmt = $this->conn->prepare($query);
 
         if(!$stmt){
@@ -133,14 +133,14 @@ class Menu extends Database {
         $stmt->bind_param("ss", $likeQuery, $likeQuery);
         $stmt->execute();
         $result = $stmt->get_result();
-        $menu = [];
+        $produk = [];
 
         while($row = $result->fetch_assoc()){
-            $menu[] = $row;
+            $produk[] = $row;
         }
 
         $stmt->close();
-        return $menu;
+        return $produk;
     }
 }
 ?>

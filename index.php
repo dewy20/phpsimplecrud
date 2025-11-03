@@ -18,7 +18,7 @@
 					<div class="container-fluid">
 						<div class="row">
 							<div class="col-sm-6">
-								<h3 class="mb-0">EPIC</h3>
+								<h3 class="mb-0">SIMRIH</h3>
 							</div>
 							<div class="col-sm-6">
 								<ol class="breadcrumb float-sm-end">
@@ -37,7 +37,7 @@
 								<div class="card">
 
 									<div class="card-header">
-										<h3 class="card-title">EPIC, Siap Mengisi Energi Anda! 
+										<h3 class="card-title">SIMRIH, Siap untuk Anda! 
 											Temukan cita rasa terbaik dan pengalaman bersantap yang tak terlupakan.</h3>
 										<div class="card-tools">
 											<button type="button" class="btn btn-tool" data-lte-toggle="card-collapse" title="Collapse">

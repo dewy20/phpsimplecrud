@@ -1,94 +1,87 @@
-<?php 
-
-// Silakan lihat komentar di file data-edit.php untuk penjelasan kode ini, karena struktur dan logikanya serupa.
-include_once 'config/class-master.php';
+<?php
+include 'config/class-master.php';
 $master = new MasterData();
-$dataProdi = $master->getUpdateProdi($_GET['id']);
-if(isset($_GET['status'])){
-    if($_GET['status'] == 'failed'){
-        echo "<script>alert('Gagal mengubah data program studi. Silakan coba lagi.');</script>";
-    }
+
+// Cek apakah ada parameter id
+if (!isset($_GET['id'])) {
+    header("Location: master-prodi-list.php?status=noid");
+    exit();
 }
 
+$id = $_GET['id'];
+
+// Ambil data menu berdasarkan id
+$dataMenu = $master->getUpdateMenu($id);
+if (!$dataMenu) {
+    header("Location: master-prodi-list.php?status=notfound");
+    exit();
+}
+
+// Cek status error jika ada
+$statusFailed = isset($_GET['status']) && $_GET['status'] == 'failed';
+
 ?>
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<?php include 'template/header.php'; ?>
-	</head>
+<head>
+    <title>Edit Menu</title>
+    <?php include 'template/header.php'; ?>
+</head>
+<body class="layout-fixed fixed-header fixed-footer sidebar-expand-lg sidebar-open bg-body-tertiary">
+<div class="app-wrapper">
+    <?php include 'template/navbar.php'; ?>
+    <?php include 'template/sidebar.php'; ?>
 
-	<body class="layout-fixed fixed-header fixed-footer sidebar-expand-lg sidebar-open bg-body-tertiary">
+    <main class="app-main">
+        <div class="app-content-header">
+            <div class="container-fluid">
+                <h3>Edit Menu: <?= htmlspecialchars($dataMenu['nama']) ?></h3>
+            </div>
+        </div>
 
-		<div class="app-wrapper">
+        <div class="app-content">
+            <div class="container-fluid">
+                <?php if ($statusFailed): ?>
+                    <div class="alert alert-danger" role="alert">
+                        Gagal menyimpan perubahan, silakan coba lagi.
+                    </div>
+                <?php endif; ?>
 
-			<?php include 'template/navbar.php'; ?>
+                <form action="proses/proses-prodi.php?aksi=updatemenu" method="POST">
+                    <input type="hidden" name="kode" value="<?= htmlspecialchars($dataMenu['id']) ?>">
 
-			<?php include 'template/sidebar.php'; ?>
+                    <div class="mb-3">
+                        <label>Nama Menu</label>
+                        <input type="text" name="nama" class="form-control" value="<?= htmlspecialchars($dataMenu['nama']) ?>" required>
+                    </div>
+                    <div class="mb-3">
+                        <label>Kategori</label>
+                        <input type="text" name="kategori" class="form-control" value="<?= htmlspecialchars($dataMenu['kategori']) ?>" required>
+                    </div>
+                    <div class="mb-3">
+                        <label>Harga</label>
+                        <input type="number" name="harga" class="form-control" value="<?= htmlspecialchars($dataMenu['harga']) ?>" required>
+                    </div>
+                    <div class="mb-3">
+                        <label>Porsi</label>
+                        <input type="number" name="porsi" class="form-control" value="<?= htmlspecialchars($dataMenu['porsi']) ?>" required>
+                    </div>
+                    <div class="mb-3">
+                        <label>Bahan Utama</label>
+                        <input type="text" name="bahan" class="form-control" value="<?= htmlspecialchars($dataMenu['bahan']) ?>" required>
+                    </div>
 
-			<main class="app-main">
+                    <button type="submit" class="btn btn-warning">Simpan Perubahan</button>
+                    <a href="master-prodi-list.php" class="btn btn-secondary">Batal</a>
+                </form>
+            </div>
+        </div>
+    </main>
 
-				<div class="app-content-header">
-					<div class="container-fluid">
-						<div class="row">
-							<div class="col-sm-6">
-								<h3 class="mb-0">Edit Program Studi</h3>
-							</div>
-							<div class="col-sm-6">
-								<ol class="breadcrumb float-sm-end">
-									<li class="breadcrumb-item"><a href="index.php">Beranda</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Edit Prodi</li>
-								</ol>
-							</div>
-						</div>
-					</div>
-				</div>
+    <?php include 'template/footer.php'; ?>
+</div>
 
-				<div class="app-content">
-					<div class="container-fluid">
-						<div class="row">
-							<div class="col-12">
-								<div class="card">
-									<div class="card-header">
-										<h3 class="card-title">Formulir Program Studi</h3>
-										<div class="card-tools">
-											<button type="button" class="btn btn-tool" data-lte-toggle="card-collapse" title="Collapse">
-												<i data-lte-icon="expand" class="bi bi-plus-lg"></i>
-												<i data-lte-icon="collapse" class="bi bi-dash-lg"></i>
-											</button>
-											<button type="button" class="btn btn-tool" data-lte-toggle="card-remove" title="Remove">
-												<i class="bi bi-x-lg"></i>
-											</button>
-										</div>
-									</div>
-                                    <form action="proses/proses-prodi.php?aksi=updateprodi" method="POST">
-									    <div class="card-body">
-                                            <div class="mb-3">
-                                                <label for="nama" class="form-label">Kode Program</label>
-                                                <input type="text" class="form-control-plaintext" id="kode" name="kode" placeholder="Masukkan Kode Program Studi" value="<?php echo $dataProdi['id']; ?>" required readonly>
-                                            </div>
-											<div class="mb-3">
-												<label for="nama" class="form-label">Nama Program Studi</label>
-												<input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama Program Studi" value="<?php echo $dataProdi['nama']; ?>" required>
-											</div>
-                                        </div>
-									    <div class="card-footer">
-                                            <button type="button" class="btn btn-danger me-2 float-start" onclick="window.location.href='master-prodi-list.php'">Batal</button>
-                                            <button type="submit" class="btn btn-warning float-end">Update Data</button>
-                                        </div>
-                                    </form>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</main>
-
-			<?php include 'template/footer.php'; ?>
-
-		</div>
-		
-		<?php include 'template/script.php'; ?>
-
-	</body>
+<?php include 'template/script.php'; ?>
+</body>
 </html>
