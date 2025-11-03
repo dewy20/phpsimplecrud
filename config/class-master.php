@@ -305,5 +305,5 @@ class MasterData extends Database {
         return $kategori;
     }
 }
->>>>>>> b30687c9df5c56b155ab077eb9e320ad94a897fa
+
 ?>
